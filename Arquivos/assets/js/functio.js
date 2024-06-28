@@ -81,7 +81,7 @@ const stage = {
     },
     doAttack(attacking,attacked){
         if(attacking.life <= 0 || attacked.life <= 0){
-            console.log("Alguém está morto não pode atacar");
+            log.addMenssage("Alguém está morto não pode atacar");
             return;
         }
 
@@ -94,12 +94,28 @@ const stage = {
         if(actualAttack > acutalDefense){
             attacked.life -= actualAttack;
             attacked.life = attacked.life < 0? 0: attacked.life
-            console.log(`${attacking.name} causou ${actualAttack} em ${attacked.name}`);
+            log.addMenssage(`${attacking.name} causou ${actualAttack} em ${attacked.name}`);
         }
         else{
-            console.log(`${attacked.name} consegui defender...`)
+            log.addMenssage(`${attacked.name} consegui defender...`)
         }
 
         this.update();
+    }
+}
+
+const log  = {
+    list:[],
+    addMenssage(msg){
+        this.list.push(msg);
+        this.render();
+    },
+    render(){
+        const logEl = document.querySelector(".log");
+        logEl.innerHTML ="";
+
+        for (let i in this.list){
+            logEl.innerHTML += `<li>${this.list[i]}</list>`
+        }
     }
 }
