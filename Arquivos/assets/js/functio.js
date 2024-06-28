@@ -80,7 +80,25 @@ const stage = {
 
     },
     doAttack(attacking,attacked){
-        console.log(`O ${attacking.name} está atacando ${attacked.name}`);
+        if(attacking.life <= 0 || attacked.life <= 0){
+            console.log("Alguém está morto não pode atacar");
+            return;
+        }
+
+        const attackFactor = (Math.random() * 2).toFixed(2);
+        const defenseFactor = (Math.random() * 2).toFixed(2);
+
+        const actualAttack = (attacking.attack * attackFactor).toFixed(2);
+        const acutalDefense = (attacked.defense * defenseFactor);
+
+        if(actualAttack > acutalDefense){
+            attacked.life -= actualAttack;
+            attacked.life = attacked.life < 0? 0: attacked.life
+            console.log(`${attacking.name} causou ${actualAttack} em ${attacked.name}`);
+        }
+        else{
+            console.log(`${attacked.name} consegui defender...`)
+        }
 
         this.update();
     }
