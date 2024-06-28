@@ -1,6 +1,10 @@
 const char =   createKnight("Samuel");
+const monster = createLittleMonster();
 
-console.log(char.nome);
-console.log(char.attack);
-console.log(char.defense);
-console.log(char.life);
+stage.start(
+    char,
+    monster,
+    document.querySelector("#char"),
+    document.querySelector("#monster")
+);
+
